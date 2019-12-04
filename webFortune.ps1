@@ -6,6 +6,7 @@ $baseUrl = "http://api.jugemkey.jp/api/horoscope/free/"
 $requestUrl = "${baseurl}${reuestDate}"
 $responseObject = Invoke-WebRequest $requestUrl
 $statusCode = $responseObject.StatusCode
+if($statusCode -eq 200){
 $content = $responseObject.Content | ConvertFrom-Json
 $horoscope = $content.horoscope
 $data = $horoscope.$requestDate
@@ -20,6 +21,7 @@ Write-Output ("金運: " + $data[$i].money)
 Write-Output ("ラッキーアイテム: " + $data[$i].item)
 Write-Output ("ラッキーカラー: " + $data[$i].color)
 Write-Output $data[$i].content
+}
 }
 Write-Output "================================================="
 Write-Output "powered by JugemKey [http://jugemkey.jp/api/waf/api_free.php]"
